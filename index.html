@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Interactiva: Conjuntos en Python</title>
+    <style>
+        /* === ESTILOS GLOBALES Y DE ESCRITORIO === */
+        body {
+            font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0;
+            padding: 40px; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; box-sizing: border-box; transition: padding 0.3s ease;
+        }
+
+        .slideshow-container { position: relative; width: 90%; max-width: 960px; }
+        
+        .slide {
+            display: none; background-color: #fff; border: 1px solid #ccc;
+            height: 540px; padding: 40px 60px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-direction: column; justify-content: center; position: relative;
+            box-sizing: border-box;
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; background-color: #cccccc; color: #333;
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 24px; transition: all 0.3s ease;
+            user-select: none; z-index: 10;
+        }
+
+        .prev { left: -70px; }
+        .next { right: -70px; }
+        .prev:hover, .next:hover { background-color: #aaaaaa; }
+
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #11a800; padding-bottom: 20px; color: #005A9C; }
+        .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
+        .single-content { text-align: center; }
+        .single-content p { font-size: 1.5em; color: #444; }
+        .single-content pre { font-size: 1.4em; display: inline-block; text-align: left; max-width: 100%; }
+        pre { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
+        .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
+
+        /* === MEDIA QUERIES === */
+        @media screen and (max-width: 768px) {
+            body { padding: 15px; }
+            .slideshow-container { width: 100%; padding-bottom: 75px; }
+            .slide { height: auto; min-height: 75vh; padding: 20px 25px; }
+            .prev, .next { top: auto; bottom: 15px; width: 45px; height: 45px; }
+            .prev { left: 50%; transform: translateX(-110%); }
+            .next { left: 50%; transform: translateX(10%); right: auto; }
+            .slide h1 { font-size: 2.2em; }
+            .slide h2 { font-size: 1.8em; }
+            .single-content p { font-size: 1.1em; }
+            .single-content pre { font-size: 1em; }
+            .footer { font-size: 0.8em; right: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <div class="slide fade">
+            <h1>Cheat Sheet de Python</h1>
+            <h2 style="color:#333; border:none;">Conjuntos (Sets)</h2>
+            <div class="footer">1 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>¿Qué es un Conjunto?</h2>
+            <div class="single-content"><p>Una colección <strong>desordenada</strong> de elementos <strong>únicos</strong>.</p></div>
+            <div class="footer">2 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Crear un Conjunto</h2>
+            <div class="single-content"><p>Se define con llaves <code>{}</code> o con la función <code>set()</code>.</p><pre><code># Con llaves
+numeros = {1, 2, 3, 4}
+
+# Con la función set()
+letras = set("palabra") # {'p', 'a', 'l', 'b', 'r'}</code></pre></div>
+            <div class="footer">3 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Crear un Conjunto Vacío</h2>
+            <div class="single-content"><p>¡Importante! Se debe usar <code>set()</code>, ya que <code>{}</code> crea un diccionario vacío.</p><pre><code>conjunto_vacio = set()
+diccionario_vacio = {}</code></pre></div>
+            <div class="footer">4 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>No Permiten Duplicados</h2>
+            <div class="single-content"><p>Los elementos duplicados se eliminan automáticamente.</p><pre><code>lista = [1, 2, 2, 3, 1, 4]
+conjunto = set(lista)
+print(conjunto) # {1, 2, 3, 4}</code></pre></div>
+            <div class="footer">5 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Son Desordenados</h2>
+            <div class="single-content"><p>No se puede acceder a los elementos por un índice.</p><pre><code>mi_conjunto = {1, 2, 3}
+# Esto dará un error (TypeError)
+print(mi_conjunto[0])</code></pre></div>
+            <div class="footer">6 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Añadir Elementos: <code>.add()</code></h2>
+            <div class="single-content"><p>Añade un único elemento al conjunto.</p><pre><code>numeros = {1, 2, 3}
+numeros.add(4)
+print(numeros) # {1, 2, 3, 4}</code></pre></div>
+            <div class="footer">7 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Añadir Elementos: <code>.update()</code></h2>
+            <div class="single-content"><p>Añade múltiples elementos de otro iterable.</p><pre><code>numeros = {1, 2}
+numeros.update([3, 4, 5])
+print(numeros) # {1, 2, 3, 4, 5}</code></pre></div>
+            <div class="footer">8 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Eliminar Elementos: <code>.remove()</code></h2>
+            <div class="single-content"><p>Elimina un elemento. Da error si el elemento no existe.</p><pre><code>numeros = {1, 2, 3}
+numeros.remove(2)
+# numeros.remove(99) # Daría un error (KeyError)</code></pre></div>
+            <div class="footer">9 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Eliminar Elementos: <code>.discard()</code></h2>
+            <div class="single-content"><p>Elimina un elemento. No da error si el elemento no existe.</p><pre><code>numeros = {1, 2, 3}
+numeros.discard(3)
+numeros.discard(99) # No pasa nada
+print(numeros) # {1, 2}</code></pre></div>
+            <div class="footer">10 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Operación: Unión (<code>|</code>)</h2>
+            <div class="single-content"><p>Combina todos los elementos de dos conjuntos.</p><pre><code>A = {1, 2, 3}
+B = {3, 4, 5}
+print(A | B) # {1, 2, 3, 4, 5}</code></pre></div>
+            <div class="footer">11 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Operación: Intersección (<code>&</code>)</h2>
+            <div class="single-content"><p>Obtiene los elementos que están en ambos conjuntos.</p><pre><code>A = {1, 2, 3}
+B = {3, 4, 5}
+print(A & B) # {3}</code></pre></div>
+            <div class="footer">12 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Operación: Diferencia (<code>-</code>)</h2>
+            <div class="single-content"><p>Obtiene los elementos del primer conjunto que no están en el segundo.</p><pre><code>A = {1, 2, 3}
+B = {3, 4, 5}
+print(A - B) # {1, 2}</code></pre></div>
+            <div class="footer">13 / 15</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Operador <code>in</code></h2>
+            <div class="single-content"><p>Verifica si un elemento existe en el conjunto. Es una operación muy rápida.</p><pre><code>numeros = {1, 2, 3, 4, 5}
+if 3 in numeros:
+    print("El 3 está en el conjunto.")</code></pre></div>
+            <div class="footer">14 / 15</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Recorrer un Conjunto</h2>
+            <div class="single-content"><p>Se usa un ciclo `for`. El orden de los elementos no está garantizado.</p><pre><code>for numero in {1, 2, 3}:
+    print(numero)</code></pre></div>
+            <div class="footer">15 / 15</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1; showSlides(slideIndex);
+        function plusSlides(n) { showSlides(slideIndex += n); }
+        function showSlides(n) {
+            let i, slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1 } 
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[slideIndex - 1].style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
